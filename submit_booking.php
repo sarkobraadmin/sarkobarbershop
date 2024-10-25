@@ -1,29 +1,24 @@
 <?php
-header("Content-Type: text/xml; charset=UTF-8");
+// Load existing XML
+$xmlFile = 'bookings.xml';
+$xml = simplexml_load_file($xmlFile);
 
-// Load the existing XML file or create a new one
-$xml_file = 'bookings.xml';
+// Create new booking entry
+$newBooking = $xml->addChild('booking');
+$newBooking->addChild('name', $_POST['name']);
+$newBooking->addChild('phone', $_POST['phone']);
+$newBooking->addChild('barber', $_POST['barber']);
+$newBooking->addChild('appointment-date', $_POST['appointment-date']);
+$newBooking->addChild('appointment-time', $_POST['appointment-time']);
 
-if (file_exists($xml_file)) {
-    $xml = simplexml_load_file($xml_file);
-} else {
-    $xml = new SimpleXMLElement('<?xml version="1.0"?><bookings></bookings>');
-}
+// Save updated XML
+$xml->asXML($xmlFile);
 
-// Create a new booking entry
-$new_booking = $xml->addChild('booking');
-$new_booking->addChild('name', htmlspecialchars($_POST['name']));
-$new_booking->addChild('phone', htmlspecialchars($_POST['phone']));
-$new_booking->addChild('barber', htmlspecialchars($_POST['barber']));
-$new_booking->addChild('appointment-date', htmlspecialchars($_POST['appointment-date']));
-$new_booking->addChild('appointment-time', htmlspecialchars($_POST['appointment-time']));
-
-// Save the XML file
-$xml->asXML($xml_file);
-
-// Redirect or display a success message
-echo '<p>Booking successful! Thank you for your appointment.</p>';
+// Redirect to a success page or show a success message
+header('Location: success.html');
+exit();
 ?>
+
 
 
 
