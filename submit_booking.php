@@ -1,6 +1,6 @@
 <?php
 // Load existing XML
-$xmlFile = 'bookings.xml';
+$xmlFile = 'https://raw.githubusercontent.com/sarkobraadmin/sarkobarbershop/refs/heads/main/bookings.xml';
 $xml = simplexml_load_file($xmlFile);
 
 // Create new booking entry
