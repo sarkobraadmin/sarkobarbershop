@@ -1,0 +1,241 @@
+/* Allgemeine Stile */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1, h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Navbar */
+#navbar {
+    background: #333;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+#navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+#navbar ul li {
+    margin: 0 15px;
+}
+
+.menu-icon {
+    display: none; /* Hamburger-Icon standardmäßig ausblenden */
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+    margin-left: auto; /* Nach rechts schieben */
+}
+
+/* Navbar Responsiveness */
+@media (max-width: 768px) {
+    #navbar ul {
+        display: none;
+        /* Menü ausblenden */
+        flex-direction: column; /* Elemente vertikal anordnen */
+        width: 100%;
+        position: absolute;
+        background: #333;
+        top: 60px; /* Position unter der Navbar */
+        left: 0;
+    }
+
+    #navbar ul.show {
+        top: 58px;
+        display: flex; /* Menü anzeigen, wenn umgeschaltet */
+    }
+
+    .menu-icon {
+        display: block; /* Hamburger-Icon anzeigen */
+    }
+}
+
+/* Hero Section */
+.hero {
+    background: url('pexels-shkrabaanthony-4625629.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+
+.cta-button {
+    background-color: #f39c12;
+    padding: 15px 30px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e67e22;
+}
+
+/* Abschnitts-Stile */
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.service-card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    width: calc(33% - 40px);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+/* Preis Stil */
+.price {
+    font-weight: bold;
+    color: #f39c12; /* Preisfarbe */
+}
+
+/* Termin Buchen Formular */
+#booking-form {
+    display: flex;
+    flex-direction: column; /* Eingaben vertikal anordnen */
+    align-items: center; /* Zentrieren */
+}
+
+#booking-form input,
+.custom-select {
+    width: 90%; /* 90% Breite für kleinere Bildschirme */
+    max-width: 400px; /* Maximalbreite begrenzen */
+    padding: 10px; /* Polsterung für bessere Touch-Interaktion */
+    margin-bottom: 15px; /* Abstand zwischen den Feldern */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Benutzerdefinierte Auswahlstile */
+.custom-select {
+    position: relative;
+}
+
+.selected-option {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    text-align: left;
+    user-select: none;
+    cursor: pointer;
+}
+
+.options-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    display: none; /* Optionen standardmäßig ausblenden */
+    z-index: 20; /* Über anderen Elementen anzeigen */
+}
+
+.options-container.show {
+    display: block; /* Optionen anzeigen */
+}
+
+.option {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #f0f0f0; /* Hover-Effekt für Optionen */
+}
+
+/* Fußzeile */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Error Message */
+#error-message {
+    margin-top: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .cta-button {
+        width: 100%; /* Vollbild für Schaltflächen auf Mobilgeräten */
+        font-size: 1rem; /* Kleinere Schriftgröße für Schaltflächen */
+        padding: 10px; /* Angepasste Polsterung für Schaltflächen */
+    }
+
+    #booking-form {
+        width: 100%; /* Vollbild für das Buchungsformular */
+        padding: 0; /* Polsterung für Mobilgeräte entfernen */
+    }
+
+    .service-card {
+        width: calc(100% - 40px); /* Vollbild für Karten auf kleinen Bildschirmen */
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-button {
+        font-size: 0.9rem; /* Kleinere Schriftgröße für Schaltflächen */
+    }
+
+    .selected-option {
+        font-size: 0.9rem; /* Kleinere Schriftgröße für Mobilgeräte */
+    }
+}
