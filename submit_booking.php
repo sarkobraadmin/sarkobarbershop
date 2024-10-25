@@ -1,44 +1,30 @@
 <?php
-// Database connection settings
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "barbershop";
+header("Content-Type: text/xml; charset=UTF-8");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Load the existing XML file or create a new one
+$xml_file = 'bookings.xml';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (file_exists($xml_file)) {
+    $xml = simplexml_load_file($xml_file);
+} else {
+    $xml = new SimpleXMLElement('<?xml version="1.0"?><bookings></bookings>');
 }
 
-// Check if the form is submitted via POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $barber = $_POST['barber'];
-    $appointment_date = $_POST['appointment-date'];
-    $appointment_time = $_POST['appointment-time'];
+// Create a new booking entry
+$new_booking = $xml->addChild('booking');
+$new_booking->addChild('name', htmlspecialchars($_POST['name']));
+$new_booking->addChild('phone', htmlspecialchars($_POST['phone']));
+$new_booking->addChild('barber', htmlspecialchars($_POST['barber']));
+$new_booking->addChild('appointment-date', htmlspecialchars($_POST['appointment-date']));
+$new_booking->addChild('appointment-time', htmlspecialchars($_POST['appointment-time']));
 
-    // Prepare SQL statement
-    $sql = "INSERT INTO bookings (name, phone, barber, appointment_date, appointment_time) 
-            VALUES (?, ?, ?, ?, ?)";
+// Save the XML file
+$xml->asXML($xml_file);
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $name, $phone, $barber, $appointment_date, $appointment_time);
-
-    // Execute query and provide feedback
-    if ($stmt->execute()) {
-        echo "Booking submitted successfully!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $stmt->close();
-    $conn->close();
-}
+// Redirect or display a success message
+echo '<p>Booking successful! Thank you for your appointment.</p>';
 ?>
+
 
 
 
